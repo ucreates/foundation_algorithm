@@ -1,0 +1,7 @@
+AccessModifierOffset: -4
+AllowShortFunctionsOnASingleLine: None
+BasedOnStyle: LLVM
+ColumnLimit: 512
+IncludeBlocks: Merge
+IndentWidth: 4
+Standard: Latest
