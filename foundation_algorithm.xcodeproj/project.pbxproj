@@ -159,6 +159,7 @@
 					};
 					FA4EED9F2E56B8A90038DBBA = {
 						CreatedOnToolsVersion = 16.4;
+						LastSwiftMigration = 1640;
 					};
 				};
 			};
@@ -370,6 +371,7 @@
 		FA4EEDA72E56B8A90038DBBA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C9V674GA4T;
@@ -378,12 +380,15 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.foundation.algorithm.unit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		FA4EEDA82E56B8A90038DBBA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = C9V674GA4T;
@@ -392,6 +397,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.foundation.algorithm.unit-test";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};

@@ -15,9 +15,9 @@
 }
 
 - (void)testNew {
-    LinearTableTemplate<int> *linearTable = new LinearTableTemplate<int>();
-    XCTAssertEqual(linearTable->GetCount(), 0);
-    delete linearTable;
+    LinearTableTemplate<int> *pLinearTable = new LinearTableTemplate<int>();
+    XCTAssertEqual(pLinearTable->GetCount(), 0);
+    SAFE_DELETE(pLinearTable);
 }
 
 - (void)testAppend {

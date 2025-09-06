@@ -7,12 +7,12 @@ private:
 
 public:
     LinearTableTemplate();
-    LinearTableTemplate(int size);
+    LinearTableTemplate(int nSize);
     ~LinearTableTemplate();
-    void Append(T value);
-    void Insert(int index, T value);
-    void Remove(int index);
-    T Get(int index);
+    void Append(T tValue);
+    void Insert(int nIndex, T tValue);
+    void Remove(int nIndex);
+    T Get(int nIndex);
     int GetCount();
     T GetFirst();
     T GetLast();

@@ -7,12 +7,12 @@ private:
 
 public:
     LinearTableConcrete();
-    LinearTableConcrete(int size);
+    LinearTableConcrete(int nSize);
     ~LinearTableConcrete();
-    void Append(int value);
-    void Insert(int index, int value);
-    void Remove(int index);
-    int Get(int index);
+    void Append(int nValue);
+    void Insert(int nIndex, int nValue);
+    void Remove(int nIndex);
+    int Get(int nIndex);
     int GetCount();
     int GetFirst();
     int GetLast();

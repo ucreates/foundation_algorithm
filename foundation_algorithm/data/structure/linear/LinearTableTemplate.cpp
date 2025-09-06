@@ -10,45 +10,45 @@ template <typename T> LinearTableTemplate<T>::~LinearTableTemplate() {
     SAFE_DELETE_ARRAY(m_tTable);
 }
 
-template <typename T> void LinearTableTemplate<T>::Append(T value) {
+template <typename T> void LinearTableTemplate<T>::Append(T tValue) {
     int nTableSize = this->GetCount();
     int nNewTableSize = nTableSize + 1;
     T tTempArray[nNewTableSize];
     for (int i = 0; i < nTableSize; i++) {
         tTempArray[i] = m_tTable[i];
     }
-    tTempArray[nNewTableSize - 1] = value;
+    tTempArray[nNewTableSize - 1] = tValue;
     SAFE_DELETE_ARRAY(m_tTable);
     m_tTable = new T[nNewTableSize];
     memcpy(m_tTable, tTempArray, sizeof(tTempArray));
     m_nTableSize = nNewTableSize;
 }
 
-template <typename T> void LinearTableTemplate<T>::Insert(int index, T value) {
+template <typename T> void LinearTableTemplate<T>::Insert(int nIndex, T tValue) {
     int nTableSize = this->GetCount();
     int nNewTableSize = nTableSize + 1;
     T tTempArray[nNewTableSize];
     for (int i = 0; i < nTableSize; i++) {
-        if (i < index) {
+        if (i < nIndex) {
             tTempArray[i] = m_tTable[i];
         } else {
             tTempArray[i + 1] = m_tTable[i];
         }
     }
-    tTempArray[index] = value;
+    tTempArray[nIndex] = tValue;
     SAFE_DELETE_ARRAY(m_tTable);
     m_tTable = new T[nNewTableSize];
     memcpy(m_tTable, tTempArray, sizeof(tTempArray));
     m_nTableSize = nNewTableSize;
 }
 
-template <typename T> void LinearTableTemplate<T>::Remove(int index) {
+template <typename T> void LinearTableTemplate<T>::Remove(int nIndex) {
     int nTableSize = this->GetCount();
     int nNewTableSize = nTableSize - 1;
     T tTempArray[nNewTableSize];
     int idx = 0;
     for (int i = 0; i < nTableSize; i++) {
-        if (i == index) {
+        if (i == nIndex) {
             continue;
         }
         tTempArray[idx++] = m_tTable[i];
@@ -59,8 +59,8 @@ template <typename T> void LinearTableTemplate<T>::Remove(int index) {
     m_nTableSize = nNewTableSize;
 }
 
-template <typename T> T LinearTableTemplate<T>::Get(int index) {
-    return m_tTable[index];
+template <typename T> T LinearTableTemplate<T>::Get(int nIndex) {
+    return m_tTable[nIndex];
 }
 
 template <typename T> int LinearTableTemplate<T>::GetCount() {
