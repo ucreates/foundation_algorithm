@@ -44,6 +44,26 @@ void Sort::Bubble(SortOrder eOrder) {
     }
 }
 
+void Sort::Select(SortOrder eOrder) {
+    int nMinIndex = 0;
+    for (int i = 0; i < m_nTableSize - 1; i++) {
+        nMinIndex = i;
+        int nMinValue = m_nTable[nMinIndex];
+        for (int j = i; j < m_nTableSize - 1; j++) {
+            bool bOrder = eOrder == SortOrder::Asc ? nMinValue > m_nTable[j + 1] : nMinValue < m_nTable[j + 1];
+            if (bOrder) {
+                nMinValue = m_nTable[j + 1];
+                nMinIndex = j + 1;
+            }
+        }
+        if (i != nMinIndex) {
+            int nValue = m_nTable[i];
+            m_nTable[i] = m_nTable[nMinIndex];
+            m_nTable[nMinIndex] = nValue;
+        }
+    }
+}
+
 int Sort::Get(int nIndex) {
     return m_nTable[nIndex];
 }

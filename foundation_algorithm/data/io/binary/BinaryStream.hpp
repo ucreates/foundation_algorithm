@@ -9,10 +9,13 @@ private:
     long m_lCurrentSeek;
 
 public:
+    static const int ByteByBit;
     BinaryStream();
     ~BinaryStream();
     bool Read(const char *pchFilePath);
-    unsigned char ReadBit(int nBits);
+    unsigned char ReadBit(const int nBits);
+    char ReadSByte();
+    unsigned char ReadUByte();
     long GetFileSize(FILE *pFile);
     void Seek(SeekOption eSeekOption);
 };
