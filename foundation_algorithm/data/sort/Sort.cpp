@@ -64,6 +64,21 @@ void Sort::Select(SortOrder eOrder) {
     }
 }
 
+void Sort::Insert(SortOrder eOrder) {
+    for (int i = 0; i < m_nTableSize; i++) {
+        int nInsertElement = m_nTable[i];
+        int nInsertPosition = i;
+        for (int j = nInsertPosition - 1; j >= 0; j--) {
+            bool bOrder = eOrder == SortOrder::Asc ? nInsertElement < m_nTable[j] : nInsertElement > m_nTable[j];
+            if (bOrder) {
+                m_nTable[j + 1] = m_nTable[j];
+                nInsertPosition--;
+            }
+        }
+        m_nTable[nInsertPosition] = nInsertElement;
+    }
+}
+
 int Sort::Get(int nIndex) {
     return m_nTable[nIndex];
 }

@@ -82,4 +82,23 @@
     SAFE_DELETE(pNumber4);
 }
 
+- (void)testEvenOddJudgment {
+    NumberTemplate<int> *pNumber1 = new NumberTemplate<int>();
+    XCTAssertTrue(pNumber1->EvenOddJudgment(100));
+    XCTAssertFalse(pNumber1->EvenOddJudgment(99));
+    SAFE_DELETE(pNumber1);
+    NumberTemplate<long> *pNumber2 = new NumberTemplate<long>();
+    XCTAssertTrue(pNumber2->EvenOddJudgment(100L));
+    XCTAssertFalse(pNumber2->EvenOddJudgment(99L));
+    SAFE_DELETE(pNumber2);
+    NumberTemplate<float> *pNumber3 = new NumberTemplate<float>();
+    XCTAssertTrue(pNumber3->EvenOddJudgment(100.0f));
+    XCTAssertFalse(pNumber3->EvenOddJudgment(99.0f));
+    SAFE_DELETE(pNumber3);
+    NumberTemplate<double> *pNumber4 = new NumberTemplate<double>();
+    XCTAssertTrue(pNumber4->EvenOddJudgment(100.0));
+    XCTAssertFalse(pNumber4->EvenOddJudgment(99.0));
+    SAFE_DELETE(pNumber4);
+}
+
 @end

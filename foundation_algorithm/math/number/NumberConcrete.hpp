@@ -9,5 +9,6 @@ public:
     int Minus(int nValue1, int nValue2);
     int Multiplication(int nValue1, int nValue2);
     int Division(int nValue1, int nValue2);
+    bool EvenOddJudgment(int nValue);
 };
 #endif /* NumberConcrete_hpp */

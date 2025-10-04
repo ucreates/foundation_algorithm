@@ -86,4 +86,40 @@
     SAFE_DELETE(pSort);
 }
 
+- (void)testInsertSortOrderAsc {
+    Sort *pSort = new Sort();
+    for (int i = 10; i >= 0; i--) {
+        pSort->Append(i);
+    }
+    printf("挿入ソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Insert(SortOrder::Asc);
+    printf("挿入ソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), i);
+    }
+    SAFE_DELETE(pSort);
+}
+
+- (void)testInsertSortOrderDesc {
+    Sort *pSort = new Sort();
+    for (int i = 0; i <= 10; i++) {
+        pSort->Append(i);
+    }
+    printf("挿入ソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Insert(SortOrder::Desc);
+    printf("挿入ソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), pSort->GetCount() - 1 - i);
+    }
+    SAFE_DELETE(pSort);
+}
+
 @end

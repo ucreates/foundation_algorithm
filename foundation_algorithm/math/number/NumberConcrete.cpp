@@ -32,3 +32,7 @@ int NumberConcrete::Multiplication(int nValue1, int nValue2) {
 int NumberConcrete::Division(int nValue1, int nValue2) {
     return nValue1 / nValue2;
 }
+
+bool NumberConcrete::EvenOddJudgment(int nValue) {
+    return 0 == nValue % 2;
+}

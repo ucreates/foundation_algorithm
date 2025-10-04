@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 const int BinaryStream::ByteByBit = 8;
+const int BinaryStream::ShortByByte = 2;
 BinaryStream::BinaryStream() {
 }
 
@@ -48,11 +49,40 @@ char BinaryStream::ReadSByte() {
     return chResult;
 }
 
+short BinaryStream::ReadSShort(Endian eEndian) {
+    short sResult = 0;
+    for (int i = 0; i < BinaryStream::ShortByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::ShortByByte - (i + 1);
+        sResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        if (i == 1) {
+            long long llSinBit = Bit::Get(chByteUnitData, BinaryStream::ByteByBit);
+            sResult = 1 == llSinBit ? (~sResult + 1) * -1 : sResult;
+            break;
+        }
+        this->m_pchBopdy += sizeof(char);
+        this->m_lCurrentSeek++;
+    }
+    return sResult;
+}
+
 unsigned char BinaryStream::ReadUByte() {
     const unsigned char chResult = (*this->m_pchBopdy) & 0xff;
     this->m_pchBopdy += sizeof(char);
     this->m_lCurrentSeek++;
     return chResult;
+}
+
+unsigned short BinaryStream::ReadUShort(Endian eEndian) {
+    unsigned short sResult = 0;
+    for (int i = 0; i < BinaryStream::ShortByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::ShortByByte - (i + 1);
+        sResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        this->m_pchBopdy += sizeof(char);
+        this->m_lCurrentSeek++;
+    }
+    return sResult;
 }
 
 long BinaryStream::GetFileSize(FILE *pFile) {

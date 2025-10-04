@@ -46,4 +46,11 @@
     SAFE_DELETE(pNumber1);
 }
 
+- (void)testEvenOddJudgment {
+    NumberConcrete *pNumber1 = new NumberConcrete();
+    XCTAssertTrue(pNumber1->EvenOddJudgment(100));
+    XCTAssertFalse(pNumber1->EvenOddJudgment(99));
+    SAFE_DELETE(pNumber1);
+}
+
 @end

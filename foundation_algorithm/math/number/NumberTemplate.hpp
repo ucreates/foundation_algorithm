@@ -9,5 +9,6 @@ public:
     T Minus(T tValue1, T tValue2);
     T Multiplication(T tValue1, T tValue2);
     T Division(T tValue1, T tValue2);
+    bool EvenOddJudgment(T tValue);
 };
 #endif /* NumberTemplate_hpp */

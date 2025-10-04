@@ -13,6 +13,7 @@ public:
     void Append(int nValue);
     void Bubble(SortOrder eOrder);
     void Select(SortOrder eOrder);
+    void Insert(SortOrder eOrder);
     int Get(int nIndex);
     int GetCount();
 };
