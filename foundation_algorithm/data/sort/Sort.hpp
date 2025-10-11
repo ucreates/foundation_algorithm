@@ -14,6 +14,7 @@ public:
     void Bubble(SortOrder eOrder);
     void Select(SortOrder eOrder);
     void Insert(SortOrder eOrder);
+    void Heap(SortOrder eOrder);
     int Get(int nIndex);
     int GetCount();
 };

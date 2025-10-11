@@ -20,3 +20,17 @@ std::string Bit::ToString(long long lValue) {
     }
     return strResult;
 }
+
+int Bit::GetFigure(long long lValue) {
+    std::string strResult = Bit::ToString(lValue);
+    size_t nStartIndex = 0;
+    for (size_t i = 0; i < strResult.length(); i++) {
+        char chValue = strResult[i];
+        if ('1' == chValue) {
+            nStartIndex = i;
+            break;
+        }
+    }
+    size_t stResult = strResult.substr(nStartIndex, strResult.length() - 1).length();
+    return static_cast<int>(stResult);
+}

@@ -1,6 +1,7 @@
 #include "Sort.hpp"
 #include "LinearTableConcrete.hpp"
 #include "Macro.hpp"
+#include <stdio.h>
 #include <string.h>
 Sort::Sort() {
     m_nTableSize = 0;
@@ -76,6 +77,34 @@ void Sort::Insert(SortOrder eOrder) {
             }
         }
         m_nTable[nInsertPosition] = nInsertElement;
+    }
+}
+
+void Sort::Heap(SortOrder eOrder) {
+    auto adjustCallback = [](int *nTable, int nCurrentIndex, int nTableSize, SortOrder eOrder) {
+        int nNotLeafValue = nTable[nCurrentIndex];
+        for (int i = 2 * nCurrentIndex + 1; i <= nTableSize; i = 2 * nCurrentIndex + 1) {
+            bool bOrder = eOrder == SortOrder::Asc ? nTable[i] < nTable[i + 1] : nTable[i] > nTable[i + 1];
+            if (i < nTableSize && bOrder) {
+                i++;
+            }
+            bOrder = eOrder == SortOrder::Asc ? nNotLeafValue > nTable[i] : nNotLeafValue < nTable[i];
+            if (bOrder) {
+                break;
+            }
+            nTable[nCurrentIndex] = nTable[i];
+            nCurrentIndex = i;
+        }
+        nTable[nCurrentIndex] = nNotLeafValue;
+    };
+    for (int i = (m_nTableSize - 1) / 2; i >= 0; i--) {
+        adjustCallback(m_nTable, i, m_nTableSize - 1, eOrder);
+    }
+    for (int i = m_nTableSize - 1; i > 0; i--) {
+        int nTempValue = m_nTable[0];
+        m_nTable[0] = m_nTable[i];
+        m_nTable[i] = nTempValue;
+        adjustCallback(m_nTable, 0, i - 1, eOrder);
     }
 }
 

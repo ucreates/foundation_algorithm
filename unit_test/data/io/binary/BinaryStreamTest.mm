@@ -13,14 +13,14 @@
 - (void)tearDown {
 }
 
-- (void)testReadBit1 {
+- (void)testReadBitFigure1 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"1" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 1 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -29,14 +29,14 @@
     return;
 }
 
-- (void)testReadBit2 {
+- (void)testReadBitFigure2 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"2" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 2 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -45,14 +45,14 @@
     return;
 }
 
-- (void)testReadBit4 {
+- (void)testReadBitFigure4 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"4" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 3 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -61,14 +61,14 @@
     return;
 }
 
-- (void)testReadBit8 {
+- (void)testReadBitFigure8 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"8" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 4 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -77,14 +77,14 @@
     return;
 }
 
-- (void)testReadBit15 {
+- (void)testReadBitFigure15 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"15" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i < 5 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -93,14 +93,14 @@
     return;
 }
 
-- (void)testReadBit16 {
+- (void)testReadBitFigure16 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"16" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 5 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -109,14 +109,14 @@
     return;
 }
 
-- (void)testReadBit32 {
+- (void)testReadBitFigure32 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"32" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 6 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -125,14 +125,14 @@
     return;
 }
 
-- (void)testReadBit64 {
+- (void)testReadBitFigure64 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"64" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 7 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -141,14 +141,14 @@
     return;
 }
 
-- (void)testReadBit128 {
+- (void)testReadBitFigure128 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"128" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = i == 8 ? 1 : 0;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
@@ -157,18 +157,232 @@
     return;
 }
 
-- (void)testReadBit170 {
+- (void)testReadBitFigure170 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"170" ofType:@"bin"];
     BinaryStream *pStream = new BinaryStream();
     bool bResult = pStream->Read([pFilepath UTF8String]);
     XCTAssertTrue(bResult);
     for (int i = 1; i <= 8; i++) {
-        unsigned char chResult = pStream->ReadBit(i);
+        unsigned char chResult = pStream->ReadBitFigure(i);
         unsigned char chThreshold = 0 != i % 2 ? 0 : 1;
         XCTAssertEqual(chResult, chThreshold);
         pStream->Seek(SeekOption::Start);
     }
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnStartBitIndex4 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"255" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(4);
+    XCTAssertEqual(15, lResult);
+    XCTAssertEqual(4, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitOutsideBoundaryOnStartBitIndex9 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"256" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(9);
+    XCTAssertEqual(256, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitOutsideBoundaryOnStartBitIndex17 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"256" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(17);
+    XCTAssertEqual(256, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnMiddleBitIndex255 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"255" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(1);
+    XCTAssertEqual(1, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(4);
+    XCTAssertEqual(15, lResult);
+    XCTAssertEqual(5, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnMiddleBitIndex256 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"256" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(1);
+    XCTAssertEqual(0, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(8);
+    XCTAssertEqual(128, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnMiddleBitIndex43690 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"43690" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = 0;
+    // read 1~3bit:1010101010101010→010
+    for (int i = 0; i < 16; i++) {
+        unsigned long lResult = pStream->ReadBit(1);
+        int value = i % 2 == 0 ? 0 : 1;
+        XCTAssertEqual(value, lResult);
+        XCTAssertEqual((i + 1) % BinaryStream::ByteByBit, pStream->GetBitIndex());
+    }
+    SAFE_DELETE(pStream);
+    pStream = new BinaryStream();
+    bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    // read 1~3bit:1010101010101010→010
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(3, pStream->GetBitIndex());
+    // read 4~6bit:1010101010101010→101
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(6, pStream->GetBitIndex());
+    // read 7~9bit:1010101010101010→010
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    // read 10~12bit:1010101010101010→101
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(4, pStream->GetBitIndex());
+    // read 13~15bit:1010101010101010→010
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(7, pStream->GetBitIndex());
+    // read 16bit:1010101010101010→1
+    lResult = pStream->ReadBit(1);
+    XCTAssertEqual(1, lResult);
+    XCTAssertEqual(0, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnMiddleBitIndex11184810 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"11184810" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(3, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(6, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(4, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(7, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(2, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(5, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(5, lResult);
+    XCTAssertEqual(0, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    pStream = new BinaryStream();
+    bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    lResult = pStream->ReadBit(3);
+    XCTAssertEqual(2, lResult);
+    XCTAssertEqual(3, pStream->GetBitIndex());
+    lResult = pStream->ReadBit(13);
+    XCTAssertEqual(5461, lResult);
+    XCTAssertEqual(0, pStream->GetBitIndex());
+    return;
+}
+
+- (void)testReadBitInsideBoundaryOnMiddleBitIndex174933 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"174933" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    // データ:101010101101010101
+    // 1~9bit:101010101
+    // bitIndex:0(初回によりスタートインデックスは0)
+    // データ1:bitIndex0~8のうち8bit取得(01010101)
+    // データ2:bitIndex0~8のうち1bit取得(1)
+    // ビッグエンディアンにより並び順は昇順:101010101
+    // bitIndex:1
+    unsigned long lResult = pStream->ReadBit(9);
+    XCTAssertEqual(341, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    // データ:101010101101010101
+    // 10~18bit:101010101
+    // bitIndex:1(初回の9bit/Readによりスタートインデックスは1)
+    // データ1:bitIndex1~8のうち7bit取得(1010101)
+    // データ2:bitIndex0~8のうち2bit取得(10)
+    // ビッグエンディアンにより並び順は昇順(101010101)
+    // bitIndex:2
+    lResult = pStream->ReadBit(9);
+    XCTAssertEqual(341, lResult);
+    XCTAssertEqual(2, pStream->GetBitIndex());
+    SAFE_DELETE(pStream);
+    pStream = new BinaryStream();
+    bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    // データ:101010101101010101
+    // 1~9bit:101010101
+    // bitIndex:0(初回によりスタートインデックスは0)
+    // データ1:bitIndex0~8のうち8bit取得(01010101)
+    // データ2:bitIndex0~8のうち1bit取得(1)
+    // リトルエンディアンにより並び順は降順:010101011
+    // bitIndex:1
+    lResult = pStream->ReadBit(9, Endian::Little);
+    XCTAssertEqual(171, lResult);
+    XCTAssertEqual(1, pStream->GetBitIndex());
+    // データ:101010101101010101
+    // 10~18bit:101010101
+    // bitIndex:1(初回の9bit/Readによりスタートインデックスは1)
+    // データ1:bitIndex1~8のうち7bit取得(1010101)
+    // データ2:bitIndex0~8のうち2bit取得(10)
+    // リトルエンディアンにより並び順は降順(101010110)
+    // bitIndex:2
+    lResult = pStream->ReadBit(9, Endian::Little);
+    XCTAssertEqual(342, lResult);
+    XCTAssertEqual(2, pStream->GetBitIndex());
     SAFE_DELETE(pStream);
     return;
 }
@@ -487,6 +701,96 @@
     pStream->Seek(SeekOption::Start);
     cResult = pStream->ReadUShort(Endian::Little);
     XCTAssertEqual(cResult, 255);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadSInt2147483648 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"2147483648" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    int nResult = pStream->ReadSInt();
+    XCTAssertEqual(nResult, -2147483648);
+    pStream->Seek(SeekOption::Start);
+    nResult = pStream->ReadSInt(Endian::Little);
+    XCTAssertEqual(nResult, 128);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadSInt4292967296 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"4292967296" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    int nResult = pStream->ReadSInt();
+    XCTAssertEqual(nResult, -2000000);
+    pStream->Seek(SeekOption::Start);
+    nResult = pStream->ReadSInt(Endian::Little);
+    XCTAssertEqual(nResult, -2139364865);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadSInt4294967295 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"4294967295" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    int nResult = pStream->ReadSInt();
+    XCTAssertEqual(nResult, -1);
+    pStream->Seek(SeekOption::Start);
+    nResult = pStream->ReadSInt(Endian::Little);
+    XCTAssertEqual(nResult, -1);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadUInt2147483648 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"2147483648" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadUInt();
+    XCTAssertEqual(lResult, 2147483648);
+    pStream->Seek(SeekOption::Start);
+    lResult = pStream->ReadUInt(Endian::Little);
+    XCTAssertEqual(lResult, 128);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadUInt4292967296 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"4292967296" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadUInt();
+    XCTAssertEqual(lResult, 4292967296);
+    pStream->Seek(SeekOption::Start);
+    lResult = pStream->ReadUInt(Endian::Little);
+    XCTAssertEqual(lResult, 2155602431);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadUInt4294967295 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"4294967295" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadUInt();
+    XCTAssertEqual(lResult, 4294967295);
+    pStream->Seek(SeekOption::Start);
+    lResult = pStream->ReadUInt(Endian::Little);
+    XCTAssertEqual(lResult, 4294967295);
     SAFE_DELETE(pStream);
     return;
 }

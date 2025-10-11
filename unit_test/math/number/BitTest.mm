@@ -49,4 +49,9 @@
     XCTAssertEqual(llResult, 0x70);
 }
 
+- (void)testFigure {
+    int nResult = Bit::GetFigure(1);
+    XCTAssertEqual(nResult, 1);
+}
+
 @end

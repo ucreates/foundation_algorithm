@@ -122,4 +122,40 @@
     SAFE_DELETE(pSort);
 }
 
+- (void)testHeapSortOrderAsc {
+    Sort *pSort = new Sort();
+    for (int i = 0; i <= 10; i++) {
+        pSort->Append(i);
+    }
+    printf("ヒープソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Heap(SortOrder::Asc);
+    printf("ヒープソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), i);
+    }
+    SAFE_DELETE(pSort);
+}
+
+- (void)testHeapSortOrderDesc {
+    Sort *pSort = new Sort();
+    for (int i = 0; i <= 10; i++) {
+        pSort->Append(i);
+    }
+    printf("ヒープソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Heap(SortOrder::Desc);
+    printf("ヒープソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), pSort->GetCount() - 1 - i);
+    }
+    SAFE_DELETE(pSort);
+}
+
 @end
