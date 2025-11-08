@@ -1,6 +1,7 @@
 #include "Sort.hpp"
 #include "LinearTableConcrete.hpp"
 #include "Macro.hpp"
+#include <functional>
 #include <stdio.h>
 #include <string.h>
 Sort::Sort() {
@@ -106,6 +107,33 @@ void Sort::Heap(SortOrder eOrder) {
         m_nTable[i] = nTempValue;
         adjustCallback(m_nTable, 0, i - 1, eOrder);
     }
+}
+
+void Sort::Quick(SortOrder eOrder) {
+    std::function<void(int *, int, int, SortOrder)> sortCallback;
+    sortCallback = [&sortCallback](int *nTable, int nLow, int nHigh, SortOrder eOrder) {
+        if (nLow >= nHigh) {
+            return;
+        }
+        int i = nLow, j = nHigh;
+        int nThreshold = nTable[nLow];
+        bool bThreshold1 = eOrder == SortOrder::Asc ? nTable[j] >= nThreshold : nTable[j] <= nThreshold;
+        bool bThreshold2 = eOrder == SortOrder::Asc ? nTable[j] <= nThreshold : nTable[j] >= nThreshold;
+        while (i < j) {
+            while (i < j && bThreshold1)
+                j--;
+            if (i < j)
+                nTable[i++] = nTable[j];
+            while (i < j && bThreshold2)
+                i++;
+            if (i < j)
+                nTable[j--] = nTable[i];
+        }
+        nTable[i] = nThreshold;
+        sortCallback(nTable, nLow, i - 1, eOrder);
+        sortCallback(nTable, i + 1, nHigh, eOrder);
+    };
+    sortCallback(m_nTable, 0, m_nTableSize - 1, eOrder);
 }
 
 int Sort::Get(int nIndex) {

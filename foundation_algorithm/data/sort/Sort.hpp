@@ -15,6 +15,7 @@ public:
     void Select(SortOrder eOrder);
     void Insert(SortOrder eOrder);
     void Heap(SortOrder eOrder);
+    void Quick(SortOrder eOrder);
     int Get(int nIndex);
     int GetCount();
 };

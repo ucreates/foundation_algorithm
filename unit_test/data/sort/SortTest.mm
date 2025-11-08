@@ -158,4 +158,40 @@
     SAFE_DELETE(pSort);
 }
 
+- (void)testQuickSortOrderAsc {
+    Sort *pSort = new Sort();
+    for (int i = 0; i <= 10; i++) {
+        pSort->Append(i);
+    }
+    printf("クイックソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Quick(SortOrder::Asc);
+    printf("クイックソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), i);
+    }
+    SAFE_DELETE(pSort);
+}
+
+- (void)testQuickSortOrderDesc {
+    Sort *pSort = new Sort();
+    for (int i = 0; i <= 10; i++) {
+        pSort->Append(i);
+    }
+    printf("クイックソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Quick(SortOrder::Desc);
+    printf("クイックソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+        XCTAssertEqual(pSort->Get(i), pSort->GetCount() - 1 - i);
+    }
+    SAFE_DELETE(pSort);
+}
+
 @end

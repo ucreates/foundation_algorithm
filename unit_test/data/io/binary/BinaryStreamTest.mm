@@ -795,4 +795,76 @@
     return;
 }
 
+- (void)testReadFloat1103626240 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"1103626240" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat();
+    XCTAssertEqual(fResult, 25.0f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadFloat3242721280 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"3242721280" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat();
+    XCTAssertEqual(fResult, -12.5f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadFloat3240361984 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"3240361984" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat();
+    XCTAssertEqual(fResult, -10.25f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadFloat1150964261 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"1150964261" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat();
+    XCTAssertEqual(fResult, 1234.566895f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadFloat16840 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"16840" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat(Endian::Little);
+    XCTAssertEqual(fResult, 25.0f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadFloat18625 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"18625" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    float fResult = pStream->ReadFloat(Endian::Little);
+    XCTAssertEqual(fResult, -12.5f);
+    SAFE_DELETE(pStream);
+    return;
+}
+
 @end
