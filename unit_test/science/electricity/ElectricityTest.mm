@@ -25,4 +25,10 @@
     SAFE_DELETE(pElectricity);
 }
 
+- (void)testCalcJoule {
+    Electricity *pElectricity = new Electricity();
+    XCTAssertEqual(1000, pElectricity->CalcJoule(10, 100));
+    SAFE_DELETE(pElectricity);
+}
+
 @end

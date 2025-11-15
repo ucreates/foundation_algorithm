@@ -867,4 +867,28 @@
     return;
 }
 
+- (void)testReadDouble13904980329019473920 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"13904980329019473920" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    double fResult = pStream->ReadDouble();
+    XCTAssertEqual(fResult, -99999.0L);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadDouble13845331891932102656 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"13845331891932102656" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    double fResult = pStream->ReadDouble();
+    XCTAssertEqual(fResult, -10.25L);
+    SAFE_DELETE(pStream);
+    return;
+}
+
 @end

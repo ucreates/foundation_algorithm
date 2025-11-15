@@ -8,6 +8,7 @@ const int BinaryStream::ByteByBit = 8;
 const int BinaryStream::ShortByByte = 2;
 const int BinaryStream::IntByByte = 4;
 const int BinaryStream::FloatByByte = 4;
+const int BinaryStream::DoubleByByte = 8;
 BinaryStream::BinaryStream() {
 }
 
@@ -225,6 +226,47 @@ float BinaryStream::ReadFloat(Endian eEndian) {
         this->Seek(SeekOption::Move);
     }
     return fResult;
+}
+
+double BinaryStream::ReadDouble(Endian eEndian) {
+    const int nFractionDataBitNum = 52;
+    const int nFractionExponentDataBitNum = 63;
+    const long lFractionDataSize = 0xFFFFFFFFFFFFF;
+    const long lFractionImplicitData = 0x10000000000000;
+    const int nExponentDataSize = 0x7ff;
+    const int nExponentBiasDataSize = 0x3FF;
+    const long lSinBitMask = 0x8000000000000000;
+    unsigned long long llData = 0;
+    double dResult = 0.0L;
+    for (int i = 0; i < BinaryStream::DoubleByByte; i++) {
+        const unsigned long long llByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::DoubleByByte - (i + 1);
+        llData |= llByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        if (i == BinaryStream::DoubleByByte - 1) {
+            unsigned long lFractionData = llData & lFractionDataSize;
+            lFractionData = lFractionData | lFractionImplicitData;
+            unsigned long lExponentData = (llData >> nFractionDataBitNum) & nExponentDataSize;
+            unsigned long lSinBitData = (llData & lSinBitMask) >> nFractionExponentDataBitNum;
+            double dFractionBase = 1.0L;
+            double dFraction = 0.0L;
+            for (int i = nFractionDataBitNum; i > 0; i--) {
+                int nBit = (lFractionData >> i) & 0x01;
+                if (i < nFractionDataBitNum) {
+                    dFractionBase = dFractionBase / 2;
+                }
+                if (1 == nBit) {
+                    dFraction += dFractionBase;
+                }
+            }
+            long nOriginalExponentData = lExponentData - nExponentBiasDataSize;
+            double dExponent = pow(2, nOriginalExponentData);
+            double dAbsoluteResult = dExponent * dFraction;
+            dResult = 1 == lSinBitData ? dAbsoluteResult * -1.0L : dAbsoluteResult;
+            break;
+        }
+        this->Seek(SeekOption::Move);
+    }
+    return dResult;
 }
 
 long BinaryStream::GetFileSize(FILE *pFile) {

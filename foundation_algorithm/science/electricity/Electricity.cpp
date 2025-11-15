@@ -10,3 +10,6 @@ int Electricity::CalcVoltage(int nAmpere, int nResistance) {
 int Electricity::CalcAmpere(int nVoltage, int nResistance) {
     return nVoltage / nResistance;
 }
+int Electricity::CalcJoule(int nElectricityPower, int nSecond) {
+    return nElectricityPower * nSecond;
+}
