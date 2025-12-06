@@ -32,6 +32,7 @@ public:
     unsigned int ReadUInt(Endian eEndian = Endian::Big);
     float ReadFloat(Endian eEndian = Endian::Big);
     double ReadDouble(Endian eEndian = Endian::Big);
+    bool *ReadBool(Endian eEndian = Endian::Big);
     long GetFileSize(FILE *pFile);
     int GetBitIndex();
     void Seek(SeekOption eSeekOption);

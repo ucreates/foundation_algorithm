@@ -891,4 +891,26 @@
     return;
 }
 
+- (void)testReadBoolFigure170 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"170" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    bool *bResults = pStream->ReadBool();
+    int nArraySize = sizeof(&bResults) / sizeof(bool);
+    for (int i = 0; i < nArraySize; i++) {
+        XCTAssertEqual(bResults[i], (0 == i % 2 ? false : true));
+    }
+    bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    *bResults = pStream->ReadBool(Endian::Little);
+    nArraySize = sizeof(&bResults) / sizeof(bool);
+    for (int i = 0; i < nArraySize; i++) {
+        XCTAssertEqual(bResults[i], (0 == i % 2 ? true : false));
+    }
+    SAFE_DELETE(pStream);
+    return;
+}
+
 @end

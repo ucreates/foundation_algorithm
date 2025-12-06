@@ -32,6 +32,7 @@ bool BinaryStream::Read(const char *pchFilePath) {
     if (0 != nResult) {
         return false;
     }
+    this->m_lCurrentSeek = 0;
     return true;
 }
 
@@ -267,6 +268,17 @@ double BinaryStream::ReadDouble(Endian eEndian) {
         this->Seek(SeekOption::Move);
     }
     return dResult;
+}
+
+bool *BinaryStream::ReadBool(Endian eEndian) {
+    const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+    static bool bResults[BinaryStream::ByteByBit];
+    for (int i = 0; i < BinaryStream::ByteByBit; i++) {
+        unsigned char chResult = Endian::Big == eEndian ? chByteUnitData >> i : chByteUnitData >> (BinaryStream::ByteByBit - i - 1);
+        bResults[i] = (bool)(chResult & 0x01);
+    }
+    this->Seek(SeekOption::Move);
+    return bResults;
 }
 
 long BinaryStream::GetFileSize(FILE *pFile) {
