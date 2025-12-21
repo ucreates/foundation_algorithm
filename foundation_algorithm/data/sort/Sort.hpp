@@ -8,7 +8,6 @@ private:
 
 public:
     Sort();
-    Sort(int nSize);
     ~Sort();
     void Append(int nValue);
     void Bubble(SortOrder eOrder);

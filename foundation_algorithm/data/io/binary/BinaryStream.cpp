@@ -7,6 +7,8 @@
 const int BinaryStream::ByteByBit = 8;
 const int BinaryStream::ShortByByte = 2;
 const int BinaryStream::IntByByte = 4;
+const int BinaryStream::LongByByte = 4;
+const int BinaryStream::LongLongByByte = 8;
 const int BinaryStream::FloatByByte = 4;
 const int BinaryStream::DoubleByByte = 8;
 BinaryStream::BinaryStream() {
@@ -160,6 +162,38 @@ int BinaryStream::ReadSInt(Endian eEndian) {
     return nResult;
 }
 
+long BinaryStream::ReadSLong(Endian eEndian) {
+    long lResult = 0;
+    for (int i = 0; i < BinaryStream::LongByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::LongByByte - (i + 1);
+        lResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        if (i == BinaryStream::LongByByte - 1) {
+            long long llSinBit = Bit::Get(chByteUnitData, BinaryStream::ByteByBit);
+            lResult = 1 == llSinBit ? (~lResult + 1) * -1 : lResult;
+            break;
+        }
+        this->Seek(SeekOption::Move);
+    }
+    return lResult;
+}
+
+long long BinaryStream::ReadSLongLong(Endian eEndian) {
+    long long llResult = 0;
+    for (int i = 0; i < BinaryStream::LongLongByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::LongLongByByte - (i + 1);
+        llResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        if (i == BinaryStream::LongLongByByte - 1) {
+            long long llSinBit = Bit::Get(chByteUnitData, BinaryStream::ByteByBit);
+            llResult = 1 == llSinBit ? (~llResult + 1) * -1 : llResult;
+            break;
+        }
+        this->Seek(SeekOption::Move);
+    }
+    return llResult;
+}
+
 unsigned char BinaryStream::ReadUByte() {
     const unsigned char chResult = (*this->m_pchBopdy) & 0xff;
     this->Seek(SeekOption::Move);
@@ -186,6 +220,28 @@ unsigned int BinaryStream::ReadUInt(Endian eEndian) {
         this->Seek(SeekOption::Move);
     }
     return nResult;
+}
+
+unsigned long BinaryStream::ReadULong(Endian eEndian) {
+    unsigned long lResult = 0;
+    for (int i = 0; i < BinaryStream::LongByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::LongByByte - (i + 1);
+        lResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        this->Seek(SeekOption::Move);
+    }
+    return lResult & 0xffffffff;
+}
+
+unsigned long long BinaryStream::ReadULongLong(Endian eEndian) {
+    unsigned long long llResult = 0;
+    for (int i = 0; i < BinaryStream::LongLongByByte; i++) {
+        const unsigned char chByteUnitData = (*this->m_pchBopdy) & 0xff;
+        int nBitShift = Endian::Big == eEndian ? i : BinaryStream::LongLongByByte - (i + 1);
+        llResult |= chByteUnitData << (nBitShift * BinaryStream::ByteByBit);
+        this->Seek(SeekOption::Move);
+    }
+    return llResult;
 }
 
 float BinaryStream::ReadFloat(Endian eEndian) {

@@ -750,6 +750,36 @@
     return;
 }
 
+- (void)testReadSLong2147483648 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"2147483648" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    long lResult = pStream->ReadSLong();
+    XCTAssertEqual(lResult, -2147483648);
+    pStream->Seek(SeekOption::Start);
+    lResult = pStream->ReadSInt(Endian::Little);
+    XCTAssertEqual(lResult, 128);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadSLongLong4294967295 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"9223372036854775808" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    long long llResult = pStream->ReadSLongLong();
+    XCTAssertEqual(llResult, -2147483648);
+    pStream->Seek(SeekOption::Start);
+    llResult = pStream->ReadSLongLong(Endian::Little);
+    XCTAssertEqual(llResult, 128);
+    SAFE_DELETE(pStream);
+    return;
+}
+
 - (void)testReadUInt2147483648 {
     NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
     NSString *pFilepath = [pBundle pathForResource:@"2147483648" ofType:@"bin"];
@@ -791,6 +821,36 @@
     pStream->Seek(SeekOption::Start);
     lResult = pStream->ReadUInt(Endian::Little);
     XCTAssertEqual(lResult, 4294967295);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadULong2147483648 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"2147483648" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long lResult = pStream->ReadULong();
+    XCTAssertEqual(lResult, 2147483648);
+    pStream->Seek(SeekOption::Start);
+    lResult = pStream->ReadULong(Endian::Little);
+    XCTAssertEqual(lResult, 128);
+    SAFE_DELETE(pStream);
+    return;
+}
+
+- (void)testReadULongLong4294967295 {
+    NSBundle *pBundle = [NSBundle bundleForClass:[self class]];
+    NSString *pFilepath = [pBundle pathForResource:@"9223372036854775808" ofType:@"bin"];
+    BinaryStream *pStream = new BinaryStream();
+    bool bResult = pStream->Read([pFilepath UTF8String]);
+    XCTAssertTrue(bResult);
+    unsigned long long llResult = pStream->ReadULongLong();
+    XCTAssertEqual(llResult, 18446744071562067968ULL);
+    pStream->Seek(SeekOption::Start);
+    llResult = pStream->ReadULongLong(Endian::Little);
+    XCTAssertEqual(llResult, 128);
     SAFE_DELETE(pStream);
     return;
 }

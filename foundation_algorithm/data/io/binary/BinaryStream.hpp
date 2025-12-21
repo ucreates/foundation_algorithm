@@ -15,6 +15,8 @@ public:
     static const int ByteByBit;
     static const int ShortByByte;
     static const int IntByByte;
+    static const int LongByByte;
+    static const int LongLongByByte;
     static const int FloatByByte;
     static const int DoubleByByte;
     BinaryStream();
@@ -27,9 +29,13 @@ public:
     char ReadSByte();
     short ReadSShort(Endian eEndian = Endian::Big);
     int ReadSInt(Endian eEndian = Endian::Big);
+    long ReadSLong(Endian eEndian = Endian::Big);
+    long long ReadSLongLong(Endian eEndian = Endian::Big);
     unsigned char ReadUByte();
     unsigned short ReadUShort(Endian eEndian = Endian::Big);
     unsigned int ReadUInt(Endian eEndian = Endian::Big);
+    unsigned long ReadULong(Endian eEndian = Endian::Big);
+    unsigned long long ReadULongLong(Endian eEndian = Endian::Big);
     float ReadFloat(Endian eEndian = Endian::Big);
     double ReadDouble(Endian eEndian = Endian::Big);
     bool *ReadBool(Endian eEndian = Endian::Big);
