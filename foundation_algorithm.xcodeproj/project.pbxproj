@@ -27,9 +27,31 @@
 		FADA5E5D2E56E48300E62AA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		FAF178C92EC065D700A5CE42 /* Exceptions for "foundation_algorithm" folder in "foundation_algorithm" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				data/recursive/Recursive.cpp,
+				data/recursive/Recursive.hpp,
+			);
+			target = FA4EED7D2E56B7BA0038DBBA /* foundation_algorithm */;
+		};
+		FAF178CA2EC065D700A5CE42 /* Exceptions for "foundation_algorithm" folder in "unit_test" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				data/recursive/Recursive.cpp,
+			);
+			target = FA4EED9F2E56B8A90038DBBA /* unit_test */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		FA4EED802E56B7BA0038DBBA /* foundation_algorithm */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				FAF178C92EC065D700A5CE42 /* Exceptions for "foundation_algorithm" folder in "foundation_algorithm" target */,
+				FAF178CA2EC065D700A5CE42 /* Exceptions for "foundation_algorithm" folder in "unit_test" target */,
+			);
 			path = foundation_algorithm;
 			sourceTree = "<group>";
 		};
