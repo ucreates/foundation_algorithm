@@ -10,6 +10,7 @@ public:
     Search(int nSize);
     ~Search();
     void Append(int nValue);
+    int Liner(int nValue);
     int Binary(int nValue);
     int GetCount();
 };

@@ -11,6 +11,16 @@ Search::~Search() {
     SAFE_DELETE_ARRAY(m_nTable);
 }
 
+int Search::Liner(int nValue) {
+    int nResult = -1;
+    for (int i = 0; i < this->m_nTableSize; i++) {
+        if (this->m_nTable[i] == nValue) {
+            nResult = this->m_nTable[i];
+        }
+    }
+    return nResult;
+}
+
 int Search::Binary(int nValue) {
     int nLow = 0;
     int nHigh = this->m_nTableSize;
