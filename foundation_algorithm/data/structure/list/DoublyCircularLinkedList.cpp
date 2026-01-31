@@ -1,13 +1,13 @@
-#include "OnewayCircularLinkedList.hpp"
+#include "DoublyCircularLinkedList.hpp"
 #include "Macro.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-OnewayCircularLinkedList::OnewayCircularLinkedList() {
+DoublyCircularLinkedList::DoublyCircularLinkedList() {
     m_nTableSize = 0;
 }
 
-OnewayCircularLinkedList::~OnewayCircularLinkedList() {
+DoublyCircularLinkedList::~DoublyCircularLinkedList() {
     for (int i = 0; i < this->m_nTableSize; i++) {
         Node *pNode = this->m_pNodeTable[i];
         printf("release::%s\n", pNode->chData);
@@ -15,13 +15,14 @@ OnewayCircularLinkedList::~OnewayCircularLinkedList() {
     }
 }
 
-void OnewayCircularLinkedList::Append(char chData[]) {
+void DoublyCircularLinkedList::Append(char chData[]) {
     Node *pNode = (Node *)malloc(sizeof(Node));
     strcpy(pNode->chData, chData);
     pNode->pNextNode = NULL;
     if (0 < this->m_nTableSize) {
         Node *pTailNode = m_pNodeTable[this->m_nTableSize - 1];
         pTailNode->pNextNode = pNode;
+        pNode->pPrevNode = pTailNode;
     }
     int nNewTableSize = m_nTableSize + 1;
     Node *pNodeTempArray[nNewTableSize];
@@ -35,17 +36,25 @@ void OnewayCircularLinkedList::Append(char chData[]) {
     m_nTableSize = nNewTableSize;
 }
 
-void OnewayCircularLinkedList::Write() {
-    Node *pNode = m_pNodeTable[0];
-    printf("%s\n", pNode->chData);
+void DoublyCircularLinkedList::Write() {
+    Node *pNode = m_pNodeTable[this->m_nTableSize - 1];
+    printf("tail::%s\n", pNode->chData);
+    do {
+        pNode = pNode->pPrevNode;
+        if (NULL != pNode) {
+            printf("prev::%s\n", pNode->chData);
+        }
+    } while (pNode != NULL);
+    pNode = m_pNodeTable[0];
+    printf("head::%s\n", pNode->chData);
     do {
         pNode = pNode->pNextNode;
         if (NULL != pNode) {
-            printf("%s\n", pNode->chData);
+            printf("next::%s\n", pNode->chData);
         }
     } while (pNode != NULL);
 }
 
-int OnewayCircularLinkedList::GetCount() {
+int DoublyCircularLinkedList::GetCount() {
     return this->m_nTableSize;
 }
