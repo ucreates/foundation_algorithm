@@ -1,18 +1,18 @@
-#ifndef OnewayCircularLinkedList_hpp
-#define OnewayCircularLinkedList_hpp
+#ifndef SingleLinkList_hpp
+#define SingleLinkList_hpp
 #include "Node.hpp"
-class OnewayCircularLinkedList {
+class SingleLinkedList {
 private:
     Node **m_pNodeTable;
     int m_nTableSize;
 
 public:
-    OnewayCircularLinkedList();
-    ~OnewayCircularLinkedList();
+    SingleLinkedList();
+    ~SingleLinkedList();
     void Append(char chData[]);
     void Insert(int nPosition, char chData[]);
     void Delete(int nPosition);
     void Write();
     int GetCount();
 };
-#endif /* OnewayCircularLinkedList_hpp */
+#endif /* SingleLinkList_hpp */
