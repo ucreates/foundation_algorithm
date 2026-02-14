@@ -1,18 +1,18 @@
-#ifndef DoublyCircularLinkedList_hpp
-#define DoublyCircularLinkedList_hpp
+#ifndef DoublyLinkedList_hpp
+#define DoublyLinkedList_hpp
 #include "Node.hpp"
-class DoublyCircularLinkedList {
+class DoublyLinkedList {
 private:
     Node **m_pNodeTable;
     int m_nTableSize;
 
 public:
-    DoublyCircularLinkedList();
-    ~DoublyCircularLinkedList();
+    DoublyLinkedList();
+    ~DoublyLinkedList();
     void Append(char chData[]);
     void Insert(int nPosition, char chData[]);
     void Delete(int nPosition);
     void Write();
     int GetCount();
 };
-#endif /* DoublyCircularLinkedList_hpp */
+#endif /* DoublyLinkedList_hpp */

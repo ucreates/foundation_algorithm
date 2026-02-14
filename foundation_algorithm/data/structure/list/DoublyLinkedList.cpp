@@ -1,13 +1,13 @@
-#include "DoublyCircularLinkedList.hpp"
+#include "DoublyLinkedList.hpp"
 #include "Macro.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-DoublyCircularLinkedList::DoublyCircularLinkedList() {
+DoublyLinkedList::DoublyLinkedList() {
     this->m_nTableSize = 0;
 }
 
-DoublyCircularLinkedList::~DoublyCircularLinkedList() {
+DoublyLinkedList::~DoublyLinkedList() {
     for (int i = 0; i < this->m_nTableSize; i++) {
         Node *pNode = this->m_pNodeTable[i];
         if (NULL != pNode) {
@@ -20,15 +20,12 @@ DoublyCircularLinkedList::~DoublyCircularLinkedList() {
     }
 }
 
-void DoublyCircularLinkedList::Append(char chData[]) {
+void DoublyLinkedList::Append(char chData[]) {
     Node *pNewNode = new Node();
     pNewNode->pPrevNode = NULL;
     pNewNode->pNextNode = NULL;
     strcpy(pNewNode->chData, chData);
     if (0 < this->m_nTableSize) {
-        Node *pTopNode = this->m_pNodeTable[0];
-        pNewNode->pNextNode = pTopNode;
-        pTopNode->pPrevNode = pNewNode;
         Node *pTailNode = this->m_pNodeTable[this->m_nTableSize - 1];
         pTailNode->pNextNode = pNewNode;
         pNewNode->pPrevNode = pTailNode;
@@ -45,8 +42,11 @@ void DoublyCircularLinkedList::Append(char chData[]) {
     this->m_nTableSize = nNewTableSize;
 }
 
-void DoublyCircularLinkedList::Insert(int nPosition, char chData[]) {
-    if (nPosition > this->m_nTableSize - 1) {
+void DoublyLinkedList::Insert(int nPosition, char chData[]) {
+    if (0 == nPosition) {
+        printf("can't insert intto top\n");
+        return;
+    } else if (nPosition > this->m_nTableSize - 1) {
         printf("not found node\n");
         return;
     }
@@ -60,11 +60,11 @@ void DoublyCircularLinkedList::Insert(int nPosition, char chData[]) {
     pNewNode->pPrevNode = NULL;
     pNewNode->pNextNode = NULL;
     strcpy(pNewNode->chData, chData);
-    int nPreviewNodeIndex = nPosition != 0 ? i - 1 : this->m_nTableSize - 1;
+    int nPreviewNodeIndex = i - 1;
     Node *pPreviewNode = this->m_pNodeTable[nPreviewNodeIndex];
     pPreviewNode->pNextNode = pNewNode;
     pNewNode->pPrevNode = pPreviewNode;
-    int nNextNodeIndex = nPreviewNodeIndex + 1 > this->m_nTableSize - 1 ? 0 : nPreviewNodeIndex + 1;
+    int nNextNodeIndex = nPreviewNodeIndex + 1;
     Node *pNextNode = this->m_pNodeTable[nNextNodeIndex];
     pNextNode->pPrevNode = pNewNode;
     pNewNode->pNextNode = pNextNode;
@@ -85,7 +85,7 @@ void DoublyCircularLinkedList::Insert(int nPosition, char chData[]) {
     this->m_nTableSize = nNewTableSize;
 }
 
-void DoublyCircularLinkedList::Delete(int nPosition) {
+void DoublyLinkedList::Delete(int nPosition) {
     if (nPosition > this->m_nTableSize - 1) {
         printf("not found node\n");
         return;
@@ -93,12 +93,16 @@ void DoublyCircularLinkedList::Delete(int nPosition) {
     Node *pDeleteNode = this->m_pNodeTable[nPosition];
     SAFE_DELETE(pDeleteNode);
     this->m_pNodeTable[nPosition] = NULL;
-    int nPreviewIndex = nPosition - 1 >= 0 ? nPosition - 1 : this->m_nTableSize - 1;
-    int nNextIndex = nPosition + 1 <= this->m_nTableSize - 1 ? nPosition + 1 : 0;
-    Node *pPrevNode = this->m_pNodeTable[nPreviewIndex];
-    Node *pNextNode = this->m_pNodeTable[nNextIndex];
-    pPrevNode->pNextNode = pNextNode;
-    pNextNode->pPrevNode = pPrevNode;
+    int nPreviewIndex = nPosition - 1;
+    int nNextIndex = nPosition + 1;
+    Node *pPrevNode = nPreviewIndex >= 0 ? this->m_pNodeTable[nPreviewIndex] : NULL;
+    Node *pNextNode = nNextIndex <= this->m_nTableSize - 1 ? this->m_pNodeTable[nNextIndex] : NULL;
+    if (NULL != pPrevNode) {
+        pPrevNode->pNextNode = pNextNode;
+    }
+    if (NULL != pNextNode) {
+        pNextNode->pPrevNode = pPrevNode;
+    }
     int nNewTableSize = this->m_nTableSize - 1;
     Node *pNodeTempArray[nNewTableSize];
     int nTempArrayIndex = 0;
@@ -116,7 +120,7 @@ void DoublyCircularLinkedList::Delete(int nPosition) {
     this->m_nTableSize = nNewTableSize;
 }
 
-void DoublyCircularLinkedList::Write() {
+void DoublyLinkedList::Write() {
     for (int i = 0; i < this->m_nTableSize; i++) {
         Node *pNode = this->m_pNodeTable[i];
         printf("%s\n", pNode->chData);
@@ -125,6 +129,6 @@ void DoublyCircularLinkedList::Write() {
     }
 }
 
-int DoublyCircularLinkedList::GetCount() {
+int DoublyLinkedList::GetCount() {
     return this->m_nTableSize;
 }
