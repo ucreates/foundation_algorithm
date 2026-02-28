@@ -11,14 +11,16 @@ SingleLinkedList::~SingleLinkedList() {
     for (int i = 0; i < this->m_nTableSize; i++) {
         Node *pNode = this->m_pNodeTable[i];
         printf("release::%s\n", pNode->chData);
-        free(pNode);
+        SAFE_DELETE(pNode);
     }
+    SAFE_DELETE_ARRAY(this->m_pNodeTable);
 }
 
 void SingleLinkedList::Append(char chData[]) {
-    Node *pNewNode = (Node *)malloc(sizeof(Node));
-    strcpy(pNewNode->chData, chData);
+    Node *pNewNode = new Node();
+    pNewNode->pPrevNode = NULL;
     pNewNode->pNextNode = NULL;
+    strcpy(pNewNode->chData, chData);
     if (0 < this->m_nTableSize) {
         Node *pTailNode = this->m_pNodeTable[this->m_nTableSize - 1];
         pTailNode->pNextNode = pNewNode;
@@ -49,7 +51,9 @@ void SingleLinkedList::Insert(int nPosition, char chData[]) {
         pNextNode = pNextNode->pNextNode;
         i++;
     }
-    Node *pNewNode = (Node *)malloc(sizeof(Node));
+    Node *pNewNode = new Node();
+    pNewNode->pPrevNode = NULL;
+    pNewNode->pNextNode = NULL;
     strcpy(pNewNode->chData, chData);
     int nPreviewNodeIndex = i - 1;
     Node *pPreviewNode = this->m_pNodeTable[nPreviewNodeIndex];
@@ -78,7 +82,7 @@ void SingleLinkedList::Delete(int nPosition) {
         return;
     }
     Node *pDeleteNode = this->m_pNodeTable[nPosition];
-    free(pDeleteNode);
+    SAFE_DELETE(pDeleteNode);
     this->m_pNodeTable[nPosition] = NULL;
     int nNewTableSize = this->m_nTableSize - 1;
     Node *pNodeTempArray[nNewTableSize];

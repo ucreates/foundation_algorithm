@@ -11,14 +11,16 @@ OnewayCircularLinkedList::~OnewayCircularLinkedList() {
     for (int i = 0; i < this->m_nTableSize; i++) {
         Node *pNode = this->m_pNodeTable[i];
         printf("release::%s\n", pNode->chData);
-        free(pNode);
+        SAFE_DELETE(pNode);
     }
+    SAFE_DELETE_ARRAY(this->m_pNodeTable);
 }
 
 void OnewayCircularLinkedList::Append(char chData[]) {
-    Node *pNewNode = (Node *)malloc(sizeof(Node));
-    strcpy(pNewNode->chData, chData);
+    Node *pNewNode = new Node();
+    pNewNode->pPrevNode = NULL;
     pNewNode->pNextNode = NULL;
+    strcpy(pNewNode->chData, chData);
     if (0 < this->m_nTableSize) {
         Node *pTailNode = this->m_pNodeTable[this->m_nTableSize - 1];
         pTailNode->pNextNode = pNewNode;
@@ -30,7 +32,7 @@ void OnewayCircularLinkedList::Append(char chData[]) {
         pNodeTempArray[i] = this->m_pNodeTable[i];
     }
     pNodeTempArray[nNewTableSize - 1] = pNewNode;
-    SAFE_DELETE(this->m_pNodeTable);
+    SAFE_DELETE_ARRAY(this->m_pNodeTable);
     this->m_pNodeTable = new Node *[nNewTableSize];
     memcpy(this->m_pNodeTable, pNodeTempArray, sizeof(pNodeTempArray));
     this->m_nTableSize = nNewTableSize;
@@ -47,7 +49,9 @@ void OnewayCircularLinkedList::Insert(int nPosition, char chData[]) {
         pNextNode = pNextNode->pNextNode;
         i++;
     }
-    Node *pNewNode = (Node *)malloc(sizeof(Node));
+    Node *pNewNode = new Node();
+    pNewNode->pPrevNode = NULL;
+    pNewNode->pNextNode = NULL;
     strcpy(pNewNode->chData, chData);
     int nPreviewNodeIndex = nPosition != 0 ? i - 1 : this->m_nTableSize - 1;
     Node *pPreviewNode = this->m_pNodeTable[nPreviewNodeIndex];
@@ -64,7 +68,7 @@ void OnewayCircularLinkedList::Insert(int nPosition, char chData[]) {
             nOldTableIndex++;
         }
     }
-    SAFE_DELETE(this->m_pNodeTable);
+    SAFE_DELETE_ARRAY(this->m_pNodeTable);
     this->m_pNodeTable = new Node *[nNewTableSize];
     memcpy(this->m_pNodeTable, pNodeTempArray, sizeof(pNodeTempArray));
     this->m_nTableSize = nNewTableSize;
@@ -76,7 +80,7 @@ void OnewayCircularLinkedList::Delete(int nPosition) {
         return;
     }
     Node *pDeleteNode = this->m_pNodeTable[nPosition];
-    free(pDeleteNode);
+    SAFE_DELETE(pDeleteNode);
     this->m_pNodeTable[nPosition] = NULL;
     int nNewTableSize = this->m_nTableSize - 1;
     Node *pNodeTempArray[nNewTableSize];
@@ -95,7 +99,7 @@ void OnewayCircularLinkedList::Delete(int nPosition) {
             pNode->pNextNode = pNodeTempArray[0];
         }
     }
-    SAFE_DELETE(this->m_pNodeTable);
+    SAFE_DELETE_ARRAY(this->m_pNodeTable);
     this->m_pNodeTable = new Node *[nNewTableSize];
     memcpy(this->m_pNodeTable, pNodeTempArray, sizeof(pNodeTempArray));
     this->m_nTableSize = nNewTableSize;
