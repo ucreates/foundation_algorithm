@@ -13,6 +13,7 @@ public:
     void Bubble(SortOrder eOrder);
     void Select(SortOrder eOrder);
     void Insert(SortOrder eOrder);
+    void Merge(SortOrder eOrder);
     void Heap(SortOrder eOrder);
     void Quick(SortOrder eOrder);
     int Get(int nIndex);

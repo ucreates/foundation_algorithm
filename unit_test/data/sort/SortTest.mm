@@ -122,6 +122,52 @@
     SAFE_DELETE(pSort);
 }
 
+- (void)testMergeSortOrderAsc {
+    Sort *pSort = new Sort();
+    pSort->Append(50);
+    pSort->Append(65);
+    pSort->Append(99);
+    pSort->Append(87);
+    pSort->Append(74);
+    pSort->Append(63);
+    pSort->Append(76);
+    pSort->Append(100);
+    pSort->Append(92);
+    printf("マージソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Merge(SortOrder::Asc);
+    printf("マージソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    SAFE_DELETE(pSort);
+}
+
+- (void)testMergeSortOrderDesc {
+    Sort *pSort = new Sort();
+    pSort->Append(50);
+    pSort->Append(65);
+    pSort->Append(99);
+    pSort->Append(87);
+    pSort->Append(74);
+    pSort->Append(63);
+    pSort->Append(76);
+    pSort->Append(100);
+    pSort->Append(92);
+    printf("マージソート前\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    pSort->Merge(SortOrder::Desc);
+    printf("マージソート後\n");
+    for (int i = 0; i < pSort->GetCount(); i++) {
+        printf("(%d)\n", pSort->Get(i));
+    }
+    SAFE_DELETE(pSort);
+}
+
 - (void)testHeapSortOrderAsc {
     Sort *pSort = new Sort();
     for (int i = 0; i <= 10; i++) {

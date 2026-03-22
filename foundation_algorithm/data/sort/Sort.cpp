@@ -81,6 +81,44 @@ void Sort::Insert(SortOrder eOrder) {
     }
 }
 
+void Sort::Merge(SortOrder eOrder) {
+    std::function<void(int *, int, int, int, SortOrder)> sortCallback;
+    sortCallback = [&sortCallback](int *nTable, int nTableSize, int nLeft, int nRight, SortOrder eOrder) {
+        if (nLeft < nRight) {
+            int nCenter = (nLeft + nRight) / 2;
+            sortCallback(nTable, nTableSize, nLeft, nCenter, eOrder);
+            sortCallback(nTable, nTableSize, nCenter + 1, nRight, eOrder);
+            int nTempTable[nTableSize];
+            int nTempLeft = nLeft;
+            int nTempRight = nCenter + 1;
+            int nLeftEndIndex = nTempRight - 1;
+            int nRightEndIndex = nRight;
+            int nTempIndex = nTempLeft;
+            int nElementNumebr = nRightEndIndex - nTempLeft + 1;
+            while (nTempLeft <= nLeftEndIndex && nTempRight <= nRightEndIndex) {
+                bool bCompare = SortOrder::Asc == eOrder ? nTable[nTempLeft] <= nTable[nTempRight] : nTable[nTempLeft] >= nTable[nTempRight];
+                if (bCompare) {
+                    nTempTable[nTempIndex++] = nTable[nTempLeft++];
+                } else {
+                    nTempTable[nTempIndex++] = nTable[nTempRight++];
+                }
+            }
+            while (nTempLeft <= nLeftEndIndex) {
+                nTempTable[nTempIndex++] = nTable[nTempLeft++];
+            }
+            while (nTempRight <= nRightEndIndex) {
+                nTempTable[nTempIndex++] = nTable[nTempRight++];
+            }
+            for (int i = 0; i < nElementNumebr; i++) {
+                nTable[nRightEndIndex] = nTempTable[nRightEndIndex];
+                nRightEndIndex--;
+            }
+        }
+    };
+    sortCallback(this->m_nTable, this->m_nTableSize, 0, this->m_nTableSize - 1, eOrder);
+    return;
+}
+
 void Sort::Heap(SortOrder eOrder) {
     auto adjustCallback = [](int *nTable, int nCurrentIndex, int nTableSize, SortOrder eOrder) {
         int nNotLeafValue = nTable[nCurrentIndex];
