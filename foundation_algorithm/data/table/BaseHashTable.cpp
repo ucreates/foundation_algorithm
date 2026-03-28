@@ -15,15 +15,15 @@ BaseHashTable::~BaseHashTable() {
         while (NULL != node) {
             HashTableNode *temp = node->pNext;
             node = node->pNext;
-            free(temp);
+            SAFE_DELETE(temp);
         }
-        free(node);
+        SAFE_DELETE(node);
     }
 }
 
 void BaseHashTable::Put(char *pchKey, char *pchValue) {
     int nHash = this->GetHashCode(pchKey);
-    HashTableNode *pNewNode = (HashTableNode *)malloc(sizeof(HashTableNode));
+    HashTableNode *pNewNode = new HashTableNode();
     pNewNode->pchKey = pchKey;
     pNewNode->pchValue = pchValue;
     pNewNode->nHash = nHash;

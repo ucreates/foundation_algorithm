@@ -1,4 +1,5 @@
 #include "DirectedGraph.hpp"
+#include "Macro.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 const int DirectedGraph::MaxVertexSize = 5;
@@ -13,6 +14,11 @@ DirectedGraph::DirectedGraph() {
 }
 
 DirectedGraph::~DirectedGraph() {
+    SAFE_DELETE(this->m_pVertexTable);
+    for (int i = 0; i < DirectedGraph::MaxVertexSize; i++) {
+        SAFE_DELETE(this->m_nAdjancencyMatrix[i]);
+    }
+    SAFE_DELETE(this->m_nAdjancencyMatrix);
 }
 
 void DirectedGraph::AddVertex(const char *pchData) {

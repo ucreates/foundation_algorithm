@@ -1,4 +1,5 @@
 #include "Stack.hpp"
+#include "Macro.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,12 +12,12 @@ Stack::~Stack() {
     while (NULL != pTopNode) {
         pDeleteNode = pTopNode;
         pTopNode = pTopNode->pNextNode;
-        free(pTopNode);
+        SAFE_DELETE(pTopNode);
     }
 }
 
 void Stack::Push(char chData[]) {
-    Node *pNode = (Node *)malloc(sizeof(Node));
+    Node *pNode = new Node();
     strcpy(pNode->chData, chData);
     pNode->pNextNode = NULL;
     if (NULL == this->m_pTopNode) {

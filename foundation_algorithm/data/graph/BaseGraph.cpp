@@ -1,11 +1,13 @@
 #include "BaseGraph.hpp"
-
+#include "Macro.hpp"
+#include <stdlib.h>
 const int BaseGraph::StackSize = 1000;
 BaseGraph::BaseGraph() {
     this->m_nStacks = new int[BaseGraph::StackSize];
 }
 
 BaseGraph::~BaseGraph() {
+    SAFE_DELETE(this->m_nStacks);
 }
 
 void BaseGraph::Push(int nElement) {

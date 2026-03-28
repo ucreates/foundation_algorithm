@@ -1,4 +1,5 @@
 #include "Queue.hpp"
+#include "Macro.hpp"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -11,12 +12,12 @@ Queue::~Queue() {
     while (NULL != pHeadNode) {
         pDeleteNode = pHeadNode;
         pHeadNode = pHeadNode->pNextNode;
-        free(pHeadNode);
+        SAFE_DELETE(pHeadNode);
     }
 }
 
 void Queue::Enqueue(char chData[]) {
-    Node *pNode = (Node *)malloc(sizeof(Node));
+    Node *pNode = new Node();
     strcpy(pNode->chData, chData);
     pNode->pPrevNode = NULL;
     pNode->pNextNode = NULL;
