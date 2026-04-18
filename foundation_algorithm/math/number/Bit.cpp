@@ -19,6 +19,16 @@ int Bit::GetFigure(long long lValue) {
     return static_cast<int>(stResult);
 }
 
+long long Bit::Set(long long llValue, long long llDigit, BitValue eBitValue) {
+    long long llRsult = llValue;
+    if (BitValue::Zero == eBitValue) {
+        llRsult &= ~(1 << (llDigit - 1));
+    } else {
+        llRsult |= (1 << (llDigit - 1));
+    }
+    return llRsult;
+}
+
 long long Bit::Invert(long long llValue, long long llDigit) {
     printf("変換前:%s\n", Bit::ToString(llValue).c_str());
     long long llResult = 0 == Bit::Get(llValue, llDigit) ? llValue |= (1 << (llDigit - 1)) : llValue &= ~(1 << (llDigit - 1));

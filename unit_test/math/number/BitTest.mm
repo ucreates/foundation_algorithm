@@ -43,6 +43,19 @@
     XCTAssertEqual(nResult, 1);
 }
 
+- (void)testSet {
+    long long llDefaultZaikoResult = Bit::Set(1, 1);
+    XCTAssertEqual(llDefaultZaikoResult, 0);
+    llDefaultZaikoResult = Bit::Set(2, 2);
+    XCTAssertEqual(llDefaultZaikoResult, 0);
+    llDefaultZaikoResult = Bit::Set(3, 2);
+    XCTAssertEqual(llDefaultZaikoResult, 1);
+    llDefaultZaikoResult = Bit::Set(2, 1, BitValue::One);
+    XCTAssertEqual(llDefaultZaikoResult, 3);
+    llDefaultZaikoResult = Bit::Set(1, 2, BitValue::One);
+    XCTAssertEqual(llDefaultZaikoResult, 3);
+}
+
 - (void)testInvert {
     long long llResult = Bit::Invert(0x00, 1);
     XCTAssertEqual(llResult, 1);
