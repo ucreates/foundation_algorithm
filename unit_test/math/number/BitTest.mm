@@ -141,4 +141,45 @@
     XCTAssertEqual(llResult, 65535);
 }
 
+- (void)testCreateMostSignificantBitOne {
+    long long llResult = Bit::CreateMostSignificantBitOne(1);
+    XCTAssertEqual(llResult, 1);
+    llResult = Bit::CreateMostSignificantBitOne(2);
+    XCTAssertEqual(llResult, 2);
+    llResult = Bit::CreateMostSignificantBitOne(3);
+    XCTAssertEqual(llResult, 4);
+    llResult = Bit::CreateMostSignificantBitOne(4);
+    XCTAssertEqual(llResult, 8);
+    llResult = Bit::CreateMostSignificantBitOne(8);
+    XCTAssertEqual(llResult, 128);
+    llResult = Bit::CreateMostSignificantBitOne(16);
+    XCTAssertEqual(llResult, 32768);
+    llResult = Bit::CreateMostSignificantBitOne(32);
+    XCTAssertEqual(llResult, 2147483648LL);
+    llResult = Bit::CreateMostSignificantBitOne(64);
+    XCTAssertEqual(llResult, 9223372036854775808ULL);
+}
+
+- (void)testGetLeastSignificantBit {
+    long long llResult = Bit::GetLeastSignificantBit(1);
+    XCTAssertEqual(llResult, 1);
+    llResult = Bit::GetLeastSignificantBit(2);
+    XCTAssertEqual(llResult, 2);
+    llResult = Bit::GetLeastSignificantBit(4);
+    XCTAssertEqual(llResult, 4);
+    llResult = Bit::GetLeastSignificantBit(8);
+    XCTAssertEqual(llResult, 8);
+    llResult = Bit::GetLeastSignificantBit(12);
+    XCTAssertEqual(llResult, 4);
+    llResult = Bit::GetLeastSignificantBit(24);
+    XCTAssertEqual(llResult, 8);
+}
+
+- (void)testIsEvenOdd {
+    for (long long i = 0; i < 10; i++) {
+        bool bResult = Bit::IsEvenOdd(i);
+        XCTAssertEqual(bResult, 0 != i % 2);
+    }
+}
+
 @end

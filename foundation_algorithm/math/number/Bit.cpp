@@ -19,6 +19,10 @@ int Bit::GetFigure(long long lValue) {
     return static_cast<int>(stResult);
 }
 
+long long Bit::GetLeastSignificantBit(long long llValue) {
+    return -llValue & llValue;
+}
+
 long long Bit::Set(long long llValue, long long llDigit, BitValue eBitValue) {
     long long llRsult = llValue;
     if (BitValue::Zero == eBitValue) {
@@ -66,6 +70,14 @@ long long Bit::CalcModulo(long long llValue, long long llN) {
 
 long long Bit::CreateMask(long long llN) {
     return (1 << llN) - 1;
+}
+
+long long Bit::CreateMostSignificantBitOne(long long llN) {
+    return 1LL << (llN - 1);
+}
+
+bool Bit::IsEvenOdd(long long llValue) {
+    return llValue & 1LL;
 }
 
 std::string Bit::ToString(long long lValue) {
